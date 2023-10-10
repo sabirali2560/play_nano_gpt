@@ -16,7 +16,7 @@ python data/shakespeare_char/prepare.py
 Train
 
 ```
-$ python train.py config/train_shakespeare_char.py --device=mps --compile=False
+python train.py config/train_shakespeare_char.py --device=mps --compile=False
 ```
 
 Sample
@@ -170,7 +170,44 @@ length of dataset in characters: 149,908 | BLEU Score: 0.4056261343012704 | Perc
 
 length of dataset in characters: 221,580 | BLEU Score: 0.3573407202216066 | Percentage of words not correctly spelled:  30.56325023084026 %
 
-length of dataset in characters: 281,409 | 
+length of dataset in characters: 281,409 | BLEU Score: 0.39691189827429607 | Percentage of words not correctly spelled:  30.79019073569482 %
+
+length of dataset in characters: 353,289 | BLEU Score: 0.3688888888888889 | Percentage of words not correctly spelled:  31.644444444444442 %
+
+length of dataset in characters: 415,481 | BLEU Score: 0.3787740164684355 | Percentage of words not correctly spelled:  28.636779505946937 %
+
+length of dataset in characters: 478,793 | BLEU Score: 0.39572192513368987 | Percentage of words not correctly spelled:  26.648841354723707 %
+
+length of dataset in characters: 553,897 | BLEU Score: 0.4151291512915129 | Percentage of words not correctly spelled:  31.088560885608857 %
 
 ## Fine tuning
+
+Fine tune training
+
+```
+python train.py config/finetune_breaking_bad.py --device=mps --compile=False
+```
+
+Comparing the pre-train and Fine tune data distributions
+
+```
+python compare_similarity.py
+```
+
+Results :
+
+Data : 8 scripts | Training : 20 max_iters
+BLEU Score for Shakespeare: 0.42727272727272725
+BLEU Score for Breaking Bad: 0.3499999999999999
+
+Data : 8 scripts | Training : 50 max_iters
+BLEU Score for Shakespeare: 0.4200710479573712
+BLEU Score for Breaking Bad: 0.3836589698046181
+
+Data : 8 scripts | Training : 100 max_iters
+BLEU Score for Shakespeare: 0.3698630136986301
+BLEU Score for Breaking Bad: 0.37990867579908677
+
+
+
 
