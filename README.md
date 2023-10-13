@@ -74,10 +74,21 @@ python train.py config/train_shakespeare_char.py --device=mps --compile=False --
 ```
 We get the following losses with different number of heads and layers :
 
-1. layers = 4, heads = 4 : train loss 1.6169, val loss 1.7946
-2. layers = 8, heads = 8 : train loss 1.6393, val loss 1.7759
-3. layers = 16, heads = 16 : train loss 1.5978, val loss 1.7658
-4. layers = 32, heads = 32 : train loss 1.5765, val loss 1.7662
+1. Layers = 4, Heads = 4:
+   - Train Loss: 1.6169
+   - Validation Loss: 1.7946
+
+2. Layers = 8, Heads = 8:
+   - Train Loss: 1.6393
+   - Validation Loss: 1.7759
+
+3. Layers = 16, Heads = 16:
+   - Train Loss: 1.5978
+   - Validation Loss: 1.7658
+
+4. Layers = 32, Heads = 32:
+   - Train Loss: 1.5765
+   - Validation Loss: 1.7662
 
 ## Evaluation Metrics
 
@@ -110,23 +121,23 @@ Here I experiment training nano GPT with my favourite dataset which is the scree
 
 I have downloaded this dataset from : https://bulletproofscreenwriting.tv/breaking-bad-tv-script-download/
 
-In particular I use scripts from the following episodes:
+In particular, I use scripts from the following episodes:
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-101-pilot-2008.pdf
+1. [Breaking Bad - 101 Pilot (2008)](https://www.scriptslug.com/assets/scripts/breaking-bad-101-pilot-2008.pdf)
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-301-no-mas-2010.pdf
+2. [Breaking Bad - 301 No Mas (2010)](https://www.scriptslug.com/assets/scripts/breaking-bad-301-no-mas-2010.pdf)
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-306-sunset-2010.pdf
+3. [Breaking Bad - 306 Sunset (2010)](https://www.scriptslug.com/assets/scripts/breaking-bad-306-sunset-2010.pdf)
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-307-one-minute-2010.pdf
+4. [Breaking Bad - 307 One Minute (2010)](https://www.scriptslug.com/assets/scripts/breaking-bad-307-one-minute-2010.pdf)
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-309-kafkaesque-2010.pdf
+5. [Breaking Bad - 309 Kafkaesque (2010)](https://www.scriptslug.com/assets/scripts/breaking-bad-309-kafkaesque-2010.pdf)
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-310-fly-2010.pdf
+6. [Breaking Bad - 310 Fly (2010)](https://www.scriptslug.com/assets/scripts/breaking-bad-310-fly-2010.pdf)
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-311-abiquiu-2010.pdf
+7. [Breaking Bad - 311 Abiquiu (2010)](https://www.scriptslug.com/assets/scripts/breaking-bad-311-abiquiu-2010.pdf)
 
-https://www.scriptslug.com/assets/scripts/breaking-bad-312-half-measures-2010.pdf
+8. [Breaking Bad - 312 Half Measures (2010)](https://www.scriptslug.com/assets/scripts/breaking-bad-312-half-measures-2010.pdf)
 
 Follow these steps to experiment on this dataset:
 
@@ -158,29 +169,38 @@ BLEU score :
 python evaluation_bleu.py --data_dir=breaking_bad_char
 ```
 
+| Length of Dataset in Characters (1K scale) | Bleu Score |
+| ----------------------------------------- | ---------- |
+| 74                                      | 0.4557877814 |
+| 149                                     | 0.4930498774 |
+| 221                                     | 0.4955752212 |
+| 281                                     | 0.5 |
+| 353                                     | 0.5193415638 |
+| 415                                     | 0.5375203915 |
+| 478                                     | 0.5366795367 |
+| 553                                     | 0.4962593516 |
+
+
 Spell Check :
 
 ```
 python evaluation_spell_check.py --data_dir=breaking_bad_char
 ```
 
-length of dataset in characters: 73,924 | BLEU Score: 0.4163732394366197 | Percentage of words not correctly spelled:  29.13732394366197 %
-
-length of dataset in characters: 149,908 | BLEU Score: 0.4056261343012704 | Percentage of words not correctly spelled:  29.038112522686028 %
-
-length of dataset in characters: 221,580 | BLEU Score: 0.3573407202216066 | Percentage of words not correctly spelled:  30.56325023084026 %
-
-length of dataset in characters: 281,409 | BLEU Score: 0.39691189827429607 | Percentage of words not correctly spelled:  30.79019073569482 %
-
-length of dataset in characters: 353,289 | BLEU Score: 0.3688888888888889 | Percentage of words not correctly spelled:  31.644444444444442 %
-
-length of dataset in characters: 415,481 | BLEU Score: 0.3787740164684355 | Percentage of words not correctly spelled:  28.636779505946937 %
-
-length of dataset in characters: 478,793 | BLEU Score: 0.39572192513368987 | Percentage of words not correctly spelled:  26.648841354723707 %
-
-length of dataset in characters: 553,897 | BLEU Score: 0.4151291512915129 | Percentage of words not correctly spelled:  31.088560885608857 %
+| Length of Dataset in Characters (1K scale) | Spell Check Score |
+| ----------------------------------------- | ----------------- |
+| 74                                      | 0.813             |
+| 149                                     | 0.827             |
+| 221                                     | 0.832             |
+| 281                                     | 0.843             |
+| 353                                     | 0.859             |
+| 415                                     | 0.868             |
+| 478                                     | 0.864             |
+| 553                                     | 0.832             |
 
 ## Fine tuning
+
+Now we fine tune the model trained on Shakespeare dataset on our Breaking Bad dataset. We will also carry out some evaluation to see how much data is required to go from Shakesperean output to something that resembles our dataset.
 
 Fine tune training
 
@@ -196,17 +216,20 @@ python compare_similarity.py
 
 Results :
 
-Data : 8 scripts | Training : 20 max_iters
-BLEU Score for Shakespeare: 0.42727272727272725
-BLEU Score for Breaking Bad: 0.3499999999999999
-
-Data : 8 scripts | Training : 50 max_iters
-BLEU Score for Shakespeare: 0.4200710479573712
-BLEU Score for Breaking Bad: 0.3836589698046181
-
-Data : 8 scripts | Training : 100 max_iters
-BLEU Score for Shakespeare: 0.3698630136986301
-BLEU Score for Breaking Bad: 0.37990867579908677
+| Data in Characters (1K scale) | Training Fine-Tune (max_iters) | Bleu of output compared to Shakespeare | Bleu of output compared to Breaking Bad (Our Dataset) |
+| ----------------------------- | ------------------------------- | ------------------------------------ | ---------------------------------------------------- |
+| 74                          | 20                            | 0.45340501                         | 0.3324372                                           |
+| 74                          | 50                            | 0.42239858                         | 0.3959435                                           |
+| 74                          | 100                           | 0.3683274                          | 0.4092526                                           |
+| 149                         | 20                            | 0.4535809                          | 0.3545534                                           |
+| 149                         | 50                            | 0.3669391                          | 0.3687556                                           |
+| 149                         | 100                           | 0.38263950                        | 0.402125                                            |
+| 281                         | 20                            | 0.4276672                          | 0.342676                                            |
+| 281                         | 50                            | 0.39730941                         | 0.3757847                                           |
+| 281                         | 100                           | 0.3564266                          | 0.4020054                                           |
+| 553                         | 20                            | 0.45182                            | 0.3509                                             |
+| 553                         | 50                            | 0.412078                           | 0.3925399                                           |
+| 553                         | 100                           | 0.38356                            | 0.392694                                           |
 
 
 
