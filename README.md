@@ -117,6 +117,8 @@ Result : ``` Percentage of words not correctly spelled:  8.292682926829269 % ```
 
 ## My favourite Dataset
 
+![Breaking_Bad_Logo](logo/breaking_bad.jpeg)
+
 Here I experiment training nano GPT with my favourite dataset which is the screenplay scripts from the popular TV series Breaking Bad
 
 I have downloaded this dataset from : https://bulletproofscreenwriting.tv/breaking-bad-tv-script-download/
@@ -181,6 +183,8 @@ python evaluation_bleu.py --data_dir=breaking_bad_char
 | 553                                     | 0.4962593516 |
 
 
+![Bleu Plot](plots/Bleu_plot.png)
+
 Spell Check :
 
 ```
@@ -197,6 +201,8 @@ python evaluation_spell_check.py --data_dir=breaking_bad_char
 | 415                                     | 0.868             |
 | 478                                     | 0.864             |
 | 553                                     | 0.832             |
+
+![Spell_Check_Plot](plots/Spell_Check.png)
 
 ## Fine tuning
 
