@@ -92,7 +92,9 @@ We get the following losses with different number of heads and layers :
 
 ## Evaluation Metrics
 
-### Specific Metric : Meant to capture how close the generated data distribution is to the training distribution.
+### Specific Metric : 
+
+Meant to capture how close the generated data distribution is to the training distribution.
 
 I have used Bleu score for my specific metric. The BLEU (Bilingual Evaluation Understudy) score is computed by comparing n-grams (contiguous sequences of n words or characters) between the generated text and reference texts. BLEU typically considers n-grams of different lengths, from unigrams (single words) to higher-order n-grams like bigrams, trigrams, and so on. Using this kind of evaluation BLEU measures the similarity between the generated text and the reference text (training text). This seems ideal for our current use case of comparing how close the generated data distribution is to the training distribution. 
 
@@ -104,7 +106,9 @@ python evaluation_bleu.py --data_dir=shakespeare_char
 
 Result : ``` BLEU Score: 0.5455284552845528 ```
 
-### General Metric : Meant to capture how our model performs in general for text generation regardless of data it has been trained on.
+### General Metric : 
+
+Meant to capture how our model performs in general for text generation regardless of data it has been trained on.
 
 I have used a simple spell check function to test if our model produces words which actually exist in the English language. This makes sense as we are training a character level GPT and if our model is able to associate characters into meaningful words we are in a win-win situation. 
 
@@ -117,7 +121,7 @@ Result : ``` Percentage of words not correctly spelled:  8.292682926829269 % ```
 
 ## My favourite Dataset
 
-![Breaking_Bad_Logo](logo/breaking_bad.jpeg)
+<img src="https://github.com/sabirali2560/play_nano_gpt/blob/main/logo/breaking_bad.jpeg" width="500" height="300">
 
 Here I experiment training nano GPT with my favourite dataset which is the screenplay scripts from the popular TV series Breaking Bad
 
@@ -165,7 +169,7 @@ An interesting experiment I perform on this is to vary the number of characters 
 
 To produce the evalutation metrics result use the following commands :
 
-BLEU score :
+### BLEU score :
 
 ```
 python evaluation_bleu.py --data_dir=breaking_bad_char
@@ -183,9 +187,9 @@ python evaluation_bleu.py --data_dir=breaking_bad_char
 | 553                                     | 0.4962593516 |
 
 
-![Bleu Plot](plots/Bleu_plot.png)
+<img src="https://github.com/sabirali2560/play_nano_gpt/blob/main/plots/Bleu_plot.png" width="800" height="500">
 
-Spell Check :
+### Spell Check :
 
 ```
 python evaluation_spell_check.py --data_dir=breaking_bad_char
@@ -202,7 +206,7 @@ python evaluation_spell_check.py --data_dir=breaking_bad_char
 | 478                                     | 0.864             |
 | 553                                     | 0.832             |
 
-![Spell_Check_Plot](plots/Spell_Check.png)
+<img src="https://github.com/sabirali2560/play_nano_gpt/blob/main/plots/Spell_Check.png" width="800" height="500">
 
 ## Fine tuning
 
