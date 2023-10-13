@@ -22,12 +22,13 @@ def word_exists(word):
 parser = argparse.ArgumentParser(description="A script that evaluates how many generated words exist in English Language.")
 
 # Add command-line arguments with specific flag names
-parser.add_argument('--output_file', '-o', type=str, help="Path to output file name.")
+parser.add_argument('--data_dir', '-i', type=str, help="data directory name.")
 
 # Parse the command-line arguments
 args = parser.parse_args()
 
-output_file_path = os.path.join('data', 'shakespeare_char',args.output_file)
+output_file = 'output.txt'
+output_file_path = os.path.join('data', args.data_dir, output_file)
 generated_text = ""
 #read output file
 with open(output_file_path, 'r') as f:
@@ -44,9 +45,9 @@ for word in generated_words:
     if is_word_punctuation(word):
         continue
     if not word_exists(word):
-        print(word)
+        #print(word)
         count+=1
 
 print(count)
 print(len(generated_words))
-print("Percentage of words not found in dictionary: ", (count/(len(generated_words)))*100)
+print("Percentage of words not correctly spelled: ", (count/(len(generated_words)))*100, "%")

@@ -10,13 +10,13 @@ nltk.download('punkt')
 parser = argparse.ArgumentParser(description="A script that evaluates bleu score between input and output files.")
 
 # Add command-line arguments with specific flag names
-parser.add_argument('--input_file', '-i', type=str, help="input file name.")
-parser.add_argument('--output_file', '-o', type=str, help="Path to output file name.")
+parser.add_argument('--data_dir', '-i', type=str, help="data directory name.")
 
 # Parse the command-line arguments
 args = parser.parse_args()
 
-input_file_path = os.path.join('data', 'shakespeare_char', args.input_file)
+input_file = 'input.txt'
+input_file_path = os.path.join('data', args.data_dir, input_file)
 original_text = ""
 
 #read input file
@@ -24,7 +24,8 @@ with open(input_file_path, 'r') as f:
     original_text = f.read()
 print(f"length of dataset in characters: {len(original_text):,}")
 
-output_file_path = os.path.join('data', 'shakespeare_char',args.output_file)
+output_file = 'output.txt'
+output_file_path = os.path.join('data', args.data_dir, output_file)
 
 generated_text = ""
 
